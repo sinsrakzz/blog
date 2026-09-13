@@ -1,1 +1,1 @@
-CTF{K4r4sH1}
+CTF{test}
