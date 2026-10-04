@@ -858,3 +858,38 @@ button:focus-visible {
     transition: none;
   }
 }
+
+/* ---------- writeup screenshots ---------- */
+
+.wr-shot {
+  margin: 14px 0;
+  border: 1px solid var(--border, #2a2a2a);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+.wr-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.wr-shot-cap {
+  display: block;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: var(--text-faint);
+  border-top: 1px solid var(--border, #2a2a2a);
+}
+
+.wr-shot-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.wr-shot-row .wr-shot {
+  margin: 0;
+}

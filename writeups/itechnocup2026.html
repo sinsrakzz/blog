@@ -40,8 +40,8 @@
         <li><a href="#vault">Reverse Engineering (ITECHNO_VAULT)</a></li>
         <li><a href="#indonesia">PWN (Indonesia)</a></li>
         <li><a href="#scroll">OSINT (Scroll)</a></li>
+        <li><a href="#git-happens">OSINT (Git Happens)</a></li>
         <li><a href="#rumus-kimia">OSINT (Rumus Kimia)</a></li>
-        <li><a href="#git-happens">OSINT(Git Happens)</a></li>
       </ol>
     </nav>
 
@@ -662,13 +662,63 @@ ITECHNO26{ehhhh_its_fragnesia_bug?????}
           <span class="level level-info">INFO</span> Scroll <span style="color:var(--text-faint);font-weight:400;font-size:12px;">— 1st challenge</span>
         </h3>
         <div class="wr-body">
-          <p>Awalnya saya coba nyari di X.com dengan search key seperti "TechnoCup26", "HimastikPNJ", dan lain-lain, tapi selalu nemu jalan buntu. Sempat nyerah dan coba soal OSINT selanjutnya dulu.</p>
-          <p>Dari sana dapat info yang sangat membantu dari sebuah GitHub repo yang dicantumkan di challenge lain: sebuah catatan berjudul "jalan jalan Notes 2026" yang menyebut "I use the same username everywhere: <code>@s3condnyah3rwthme</code>". Karena ada "second", berarti ada "first" saya coba cari <code>@h3rwthme</code>, dan ketemu akunnya dengan deskripsi bio yang cocok dengan username yang dicari-cari.</p>
-          <p>Dari list follower-nya yang cuma empat orang, ditemukan akun <code>@hannns16</code>. Scroll ke paling bawah, ada sebuah flag di kolom reply yang format depannya kurang sesuai tinggal ganti prefix-nya dan ketemu jawabannya.</p>
+          <p>Oke intinya, awalnya saya nyoba nyari di X.com dengan search key seperti "TechnoCup26", "HimastikPNJ", dll, tapi selalu nemu jalan buntu, dan kayaknya saya paling ngerasa IQ 85 di sini. Jadinya saya nyerah dan coba soal OSINT selanjutnya.</p>
+        </div>
+        <div class="wr-shot">
+          <img src="img/scroll-notes.png" alt="GitHub README jalan jalan Notes 2026 - I use the same username everywhere: @s3condnyah3rwthme" loading="lazy" />
+          <span class="wr-shot-cap">jalan jalan Notes 2026 — README repo GitHub</span>
+        </div>
+        <div class="wr-body">
+          <p>Nah, di sini saya dapat info daging yang sangat A1 dari GitHub repo yang dicantumkan di challenge lain. Cuma tetep aja di aplikasi burung biru username-nya nggak ada. Kalau ada second-nya berarti ada first-nya, jadi saya coba cari <code>@h3rwthme</code> dan di sini ketemu akunnya dengan deskripsi nama username yang dicari-cari.</p>
+        </div>
+        <div class="wr-shot">
+          <img src="img/scroll-h3rwthme-x.png" alt="Profil X @h3rwthme bio s3condnyah3rwthme" loading="lazy" />
+          <span class="wr-shot-cap">Profil X @h3rwthme</span>
+        </div>
+        <div class="wr-body">
+          <p>Dari list follower-nya yang hanya empat orang, bisa ditemukan akun <code>@hannns16</code>.</p>
+        </div>
+        <div class="wr-shot-row">
+          <div class="wr-shot">
+            <img src="img/scroll-hannns16-profile.png" alt="Profil X Han @hannns16" loading="lazy" />
+          </div>
+          <div class="wr-shot">
+            <img src="img/scroll-hannns16-flag.png" alt="Tweet @hannns16 berisi ITechnoCTF{1ni_Ad4lah_Fl3gNyAh}" loading="lazy" />
+          </div>
+        </div>
+        <div class="wr-body">
+          <p>Kemudian, jika kita scroll ke paling bawah maka akan ada sebuah flag di kolom reply yang format depannya kurang sesuai, tinggal ganti dan ketemu jawabannya.</p>
         </div>
         <div class="wr-flag">
           <span class="wr-flag-label">Flag</span>
           ITECHNO26{1ni_Ad4lah_Fl3gNyAh}
+        </div>
+      </article>
+
+      <article class="wr-chal" id="git-happens">
+        <h3 class="wr-chal-title">
+          <span class="level level-info">INFO</span> Git Happens <span style="color:var(--text-faint);font-weight:400;font-size:12px;">— 3rd challenge (yak yang challenge kedua di akhir)</span>
+        </h3>
+        <div class="wr-shot">
+          <img src="img/git-branches.png" alt="Daftar branch repo s3condnyah3rwthme/portofolio: main, wifi-tools, jalanjalan-notes, iniadalahblog-content" loading="lazy" />
+        </div>
+        <div class="wr-shot">
+          <img src="img/git-release.png" alt="Release v0.1.0 - conference_photos.zip berisi ssid.jpg dan tempat.jpg" loading="lazy" />
+          <span class="wr-shot-cap">Release v0.1.0 — conference_photos.zip</span>
+        </div>
+        <div class="wr-body">
+          <p>Di foto paling atas adalah beberapa branch dalam repo GitHub <code>s3condnyah3rwthme/portofolio</code>. Lalu di bawahnya adalah isi dari branch <code>wifi-tools</code>, lebih spesifiknya isi dari <code>RELEASES/v0.1.0-conference-photos.md</code>. Mengingat format flag sebagai berikut</p>
+        </div>
+        <div class="wr-term">
+          <div class="wr-term-bar"><span class="term-dots small"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></span></div>
+          <pre>ITECHNO26{LANpnj_Tempatpnj_Tahun}</pre>
+        </div>
+        <div class="wr-body">
+          <p>Maka tinggal copy-paste saja sesuai yang ditulis admin, menjadi flag yang benar ini.</p>
+        </div>
+        <div class="wr-flag">
+          <span class="wr-flag-label">Flag</span>
+          ITECHNO26{PNJ-H0tspot_OM1PNJ_2026}
         </div>
       </article>
 
@@ -677,29 +727,34 @@ ITECHNO26{ehhhh_its_fragnesia_bug?????}
           <span class="level level-warn">WARN</span> Rumus Kimia <span style="color:var(--text-faint);font-weight:400;font-size:12px;">— 2nd challenge</span>
         </h3>
         <div class="wr-body">
-          <p>Hint: <em>"Coba itu diliat ig mimin, ig mimin sama kaya nama author-nya, bukan di akun pertama tapi cari di akun second mimin."</em></p>
-          <p>Akun "first" yang dimaksud di hint sudah diprivat, tapi di list follow-nya bisa ditemukan akun ber-username <code>@secondnyah3rwthme</code>. Isinya cuma 7 post, jadi bisa dicek satu-satu dengan mudah.</p>
-          <p>Ketemu satu post dengan rumus kimia + foto yang juga muncul di repository GitHub sebelumnya. Komentar awalnya menyebut "gas etena", tapi reply dari admin yang masih hangat memperjelas kalau rumus kimia yang dimaksud adalah gas <strong>etana</strong>, yaitu <code class="wr-hl">C2H6</code>.</p>
-          <p>Foto yang sama didapat dari salah satu branch GitHub, <code>iniadalahblog-content</code>. Dari title-nya diketahui ini foto dari Cyber Summit 2026 - Jakarta. Ditelusuri lebih lanjut ke challenge <a href="#git-happens">Git Happens</a>, ketahuan kalau Cyber Summit ini berlokasi di OMI PNJ.</p>
+          <p><strong>Hint:</strong> <em>"Coba itu diliat ig mimin, ig mimin sama kaya nama author-nya, bukan di akun pertama tapi cari di akun second mimin."</em></p>
+        </div>
+        <div class="wr-shot">
+          <img src="img/rumus-h3rwthme-ig.png" alt="Profil Instagram h3rwthme, 7 post, followed by kineishalvr" loading="lazy" />
+        </div>
+        <div class="wr-body">
+          <p>Ini akun "first" yang dimention di hint, nah berhubung akunnya udah diprivat jadi nggak bisa cantumin screenshot-nya, tapi intinya di list follow-nya bisa ditemukan akun ber-username <code>@secondnyah3rwthme</code>. Di dalam akunnya ada 7 post doang, jadi bisa dicek satu-satu dengan mudah.</p>
+        </div>
+        <div class="wr-shot">
+          <img src="img/rumus-comment-photo.jpg" alt="Post Instagram dengan rumus kimia gas etena dan foto makanan di meja kayu, komentar h3rwthme dan secondnyah3rwthme menyebut gas etana" loading="lazy" />
+        </div>
+        <div class="wr-body">
+          <p>Ketemu lah post ini dengan rumus kimianya + foto yang sama yang juga ada di repository GitHub sebelumnya (foto yang dimaksud ada di bawah). Meskipun di komentar awalnya mention gas etena, tapi clue dari reply admin yang masih hangat memperjelas kalau rumus kimia yang dimaksud adalah gas etana, yaitu <strong>C2H6</strong>.</p>
+        </div>
+        <div class="wr-shot">
+          <img src="img/rumus-blog-content.jpg" alt="Post blog layout: Cyber Summit 2026 - Jakarta, date 2026-04-12, Attended Cyber Summit 2026 at Jakarta. Great conference!" loading="lazy" />
+        </div>
+        <div class="wr-body">
+          <p>Foto ini didapat dari salah satu branch, yaitu <code>/iniadalahblog-content/</code>. Dari title-nya diketahui ini foto dari Cyber Summit 2026 - Jakarta, kalau kita telusuri ke challenge <a href="#git-happens">Git Happens</a>, kita akhirnya tahu kalau Cyber Summit ini berlokasi di OMI PNJ.</p>
         </div>
         <div class="wr-flag">
           <span class="wr-flag-label">Flag</span>
           ITECHNO26{C2H6_OMIPNJ_2026}
         </div>
-      </article>
-
-      <article class="wr-chal" id="git-happens">
-        <h3 class="wr-chal-title">
-          <span class="level level-info">INFO</span> Git Happens <span style="color:var(--text-faint);font-weight:400;font-size:12px;">— 3rd challenge</span>
-        </h3>
-        <div class="wr-body">
-          <p>Repo GitHub <code>s3condnyah3rwthme/portofolio</code> punya beberapa branch: <code>main</code>, <code>wifi-tools</code>, <code>jalanjalan-notes</code>, dan <code>iniadalahblog-content</code>.</p>
-          <p>Di branch <code>wifi-tools</code>, tepatnya di <code>RELEASES/v0.1.0-conference-photos.md</code>, ada rilis "Release v0.1.0 - conference_photos.zip" dengan isi <code>ssid.jpg</code> (PNJ-H0tspot Co. booth) dan <code>tempat.jpg</code> (OM1PNJ entrance sign), dengan catatan foto-foto ini diambil di Cyber Summit 2026.</p>
-          <p>Mengingat format flag yang diberikan panitia <code>ITECHNO26{LANpnj_Tempatpnj_Tahun}</code> tinggal disusun sesuai yang tertulis di rilis tersebut.</p>
-        </div>
-        <div class="wr-flag">
-          <span class="wr-flag-label">Flag</span>
-          ITECHNO26{PNJ-H0tspot_OM1PNJ_2026}
+        <div class="wr-shot-row">
+          <div class="wr-shot"><img src="img/proof-omipnj-1.jpg" alt="Cinematic OMI PNJ - Tugas Teknologi Multimedia, dua orang makan di meja bawah payung kuning" loading="lazy" /></div>
+          <div class="wr-shot"><img src="img/proof-omipnj-2.jpg" alt="Sesi kumpul di bawah pohon dengan tas ransel dan botol air" loading="lazy" /></div>
+          <div class="wr-shot"><img src="img/proof-omipnj-3.jpg" alt="Papan nama toko OMI PNJ Mart, mitra Indogrosir" loading="lazy" /></div>
         </div>
       </article>
     </section>
