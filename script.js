@@ -14,13 +14,40 @@ const writeups = [
   {
     file: "itechnocup2026_penyisihan.md",
     title: "ITechnoCup 2026 CTF Penyisihan (Team BOEDOET AK DRAGON 47)",
-    date: "2026-05-31",
+    date: "2026-08-27",
     size: "22.6K",
     level: "crit",
     tags: ["forensics", "cryptography", "reverse-engineering", "pwn", "osint"],
     summary:
       "Full qualification writeup across five categories: unpacking layered ZIPs, cracking hash preimages in Merkle trees, reversing stripped PE keygen checks, exploiting range-check flaws to hijack function pointers, and tracing OSINT clues across social media, GitHub releases, and chemistry hints to identify a real-world venue.",
     href: "writeups/itechnocup2026.html",
+  },
+  {
+    file: "code2026_penyisihan.md",
+    title: "C.O.D.E Challenge 2026 CTF Penyisihan (Team D'Blanc)",
+    date: "2026-09-19",
+    size: "14.1K",
+    level: "warn",
+    tags: ["web-security", "misc", "forensics"],
+    summary:
+      "Partial qualification writeup (write-up tidak dikumpulkan, hanya setengah soal dikerjakan): JWT audience confusion untuk impersonasi identitas executive, reverse-engineering protokol C2 Ghost Agent untuk RCE berantai, polyglot JPEG+ZIP dan ZIP bertingkat untuk steganografi, dekripsi XOR berkunci SHA-256 pada dump memori forensik, dan pemulihan binary log biner wtmp/btmp.",
+    href: "writeups/code2026.html",
+  },
+];
+
+const awards = [
+  {
+    title: "1st Place Winner — Cyber Security Competition",
+    subtitle: "High School Student Category",
+    event: "ITechno Cup 2026, organized by HIMATIK, Politeknik Negeri Jakarta",
+    date: "August 17 – September 29, 2026",
+    team: "BOEDOET AK DRAGON 47 — Raka Wirya Kusuma, Hans Nathanael Kusuma, Rifqi Al Muzhaky",
+    certNo: "1701/PL3.13/SRt/ITECHNO CUP/HIMATIK PNJ/IX/2026",
+    cert: "writeups/img/awards/itechnocup2026-certificate.jpg",
+    gallery: [
+      "writeups/img/awards/itechnocup2026-doc-1.jpg",
+      "writeups/img/awards/itechnocup2026-team-photo.jpg",
+    ],
   },
 ];
 
@@ -42,7 +69,9 @@ const tools = [
 ];
 
 const timeline = [
-  { date: "2026-05", text: "Advanced to the Finals ITechnoCup 2026 CTF, playing with team BOEDOET AK DRAGON 47" },
+  { date: "2026-08-27", text: "Advanced to the Finals ITechnoCup 2026 CTF, playing with team BOEDOET AK DRAGON 47" },
+  { date: "2026-09-19", text: "Top 1 kategori SMA/K di C.O.D.E Challenge 2026 CTF Penyisihan, playing with team D'Blanc (KiiOrg: First Blood Cryptography Wave 1 & 2; karashi: First Blood Forensic)" },
+  { date: "2026-09-29", text: "1st Place - Cyber Security Competition | ITechno Cup 2026, playing with team BOEDOET AK DRAGON 47" },
 ];
 
 const CATEGORY_LABEL = {
@@ -218,7 +247,7 @@ function renderNav() {
     el("span", { class: "dot dot-g" }),
   ]);
 
-  const links = ["case-files", "toolset", "log", "about"].map((id) =>
+  const links = ["case-files", "awards", "toolset", "log", "about"].map((id) =>
     el("a", { class: "nav-link", text: `./${id}`, attrs: { href: `#${id}` } })
   );
 
@@ -315,6 +344,120 @@ function renderWriteups() {
       el("h2", { class: "section-title", text: "case files" }),
     ]),
     el("div", { class: "case-grid" }, rows),
+  ]);
+}
+
+let lightboxEl = null;
+let lightboxState = { images: [], index: 0 };
+
+function ensureLightbox() {
+  if (lightboxEl) return lightboxEl;
+
+  const imgEl = el("img", { class: "lightbox-img", attrs: { alt: "" } });
+  const captionEl = el("div", { class: "lightbox-caption" });
+  const closeBtn = el("button", { class: "lightbox-close", text: "✕", attrs: { "aria-label": "close" } });
+  const prevBtn = el("button", { class: "lightbox-nav lightbox-prev", text: "‹", attrs: { "aria-label": "previous" } });
+  const nextBtn = el("button", { class: "lightbox-nav lightbox-next", text: "›", attrs: { "aria-label": "next" } });
+
+  const overlay = el("div", { class: "lightbox-overlay", attrs: { role: "dialog", "aria-modal": "true" } }, [
+    closeBtn,
+    prevBtn,
+    el("div", { class: "lightbox-stage" }, [imgEl, captionEl]),
+    nextBtn,
+  ]);
+
+  function update() {
+    const { images, index } = lightboxState;
+    const item = images[index];
+    imgEl.src = item.src;
+    imgEl.alt = item.alt ?? "";
+    captionEl.textContent = item.caption ?? "";
+    const multi = images.length > 1;
+    prevBtn.style.display = multi ? "" : "none";
+    nextBtn.style.display = multi ? "" : "none";
+  }
+
+  function close() {
+    overlay.classList.remove("is-open");
+    document.body.classList.remove("lightbox-locked");
+  }
+
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+  prevBtn.addEventListener("click", () => {
+    lightboxState.index = (lightboxState.index - 1 + lightboxState.images.length) % lightboxState.images.length;
+    update();
+  });
+  nextBtn.addEventListener("click", () => {
+    lightboxState.index = (lightboxState.index + 1) % lightboxState.images.length;
+    update();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!overlay.classList.contains("is-open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") prevBtn.click();
+    if (e.key === "ArrowRight") nextBtn.click();
+  });
+
+  overlay._update = update;
+  document.body.appendChild(overlay);
+  lightboxEl = overlay;
+  return overlay;
+}
+
+function openLightbox(images, startIndex = 0) {
+  const overlay = ensureLightbox();
+  lightboxState = { images, index: startIndex };
+  overlay._update();
+  overlay.classList.add("is-open");
+  document.body.classList.add("lightbox-locked");
+}
+
+function renderAwards() {
+  const cards = awards.map((a, i) => {
+    const images = [
+      { src: a.cert, alt: `Certificate — ${a.title}`, caption: `Certificate — ${a.title}` },
+      ...a.gallery.map((src) => ({ src, alt: `Dokumentasi — ${a.event}`, caption: `Dokumentasi — ${a.event}` })),
+    ];
+
+    const certImg = el("img", {
+      attrs: { src: a.cert, alt: `Certificate — ${a.title}, ${a.event}`, loading: "lazy" },
+    });
+
+    const media = el(
+      "button",
+      { class: "award-media", attrs: { type: "button", "aria-label": "Lihat dokumentasi" } },
+      [certImg, el("span", { class: "award-media-hint", text: "lihat dokumentasi →" })]
+    );
+    media.addEventListener("click", () => openLightbox(images, 0));
+
+    return el(
+      "article",
+      { class: "award-card", attrs: { "data-reveal": "", style: `transition-delay:${(i % 3) * 70}ms` } },
+      [
+        media,
+        el("div", { class: "award-body" }, [
+          el("h3", { class: "award-title", text: a.title }),
+          el("div", { class: "award-subtitle", text: a.subtitle }),
+          el("div", { class: "award-meta" }, [
+            el("span", { text: a.event }),
+            el("span", { class: "meta-dim", text: a.date }),
+          ]),
+          el("div", { class: "award-team", text: a.team }),
+          el("div", { class: "award-certno", text: `cert no. ${a.certNo}` }),
+        ]),
+      ]
+    );
+  });
+
+  return el("section", { class: "section", attrs: { id: "awards" } }, [
+    el("div", { class: "section-head" }, [
+      el("span", { class: "section-prompt", text: "$ ls -la ./awards" }),
+      el("h2", { class: "section-title", text: "awards" }),
+    ]),
+    el("div", { class: "award-grid" }, cards),
   ]);
 }
 
@@ -440,6 +583,7 @@ function main() {
     renderNav(),
     renderHero(),
     renderWriteups(),
+    renderAwards(),
     renderToolset(),
     renderLog(),
     renderAbout(),
